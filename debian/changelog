@@ -1,0 +1,5 @@
+fwupd-snap (1.0) bionic; urgency=medium
+
+  * Initial release.
+
+ -- Mario Limonciello <mario.limonciello@dell.com>  Mon, 01 Oct 2018 11:58:12 -0500

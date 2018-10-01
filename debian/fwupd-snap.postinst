@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+case $1 in
+    configure)
+        if snap list fwupd 1>/dev/null 2>&1; then
+            echo "Skipping fwupd snap installation"
+        else
+            snap ack /usr/lib/fwupd-snap/fwupd.assert
+            snap install /usr/lib/fwupd-snap/fwupd.snap --classic
+        fi
+        ;;
+
+esac
+
+#DEBHELPER#
+
+exit 0

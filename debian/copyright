@@ -1,0 +1,15 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: fwupdate
+Source: https://github.com/hughsie/fwupd
+Comment:
+ This package exists to download a snap from the snap store and publish it in
+ .deb format.  The actual source code may be found in the fwupd source package:
+ 'apt-get source fwupd'.
+
+Files: *
+Copyright: 2018 Mario Limonciello <mario.limonciello@dell.com>
+License: LGPL-2.1+
+
+License: LGPL-2.1+
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/LGPL-2.1".

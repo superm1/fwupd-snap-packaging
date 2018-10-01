@@ -1,0 +1,8 @@
+/debian/.debhelper/
+/debian/files
+/debian/fwupd-snap.debhelper.log
+/debian/fwupd-snap.substvars
+/debian/fwupd-snap/
+/fwupd.assert
+/fwupd.snap
+
