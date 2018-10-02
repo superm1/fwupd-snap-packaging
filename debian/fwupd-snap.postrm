@@ -1,13 +1,10 @@
 #!/bin/sh
-# postrm script for fwupdate-signed
-#
-# see: dh_installdeb(1)
 
 set -e
 
 case "$1" in
 	remove)
-		if snap list fwupd 1>/dev/null 2>&1; then
+		if snap info fwupd 1>/dev/null 2>&1; then
 			snap remove fwupd
 		fi
 		rm -f /usr/share/polkit-1/actions/org.freedesktop.fwupd.policy

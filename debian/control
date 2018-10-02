@@ -2,13 +2,13 @@ Source: fwupd-snap
 Section: utils
 Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Build-Depends: debhelper (>= 9), python3, snapd
-Standards-Version: 4.1.3
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.4
 
 Package: fwupd-snap
 Architecture: amd64 i386
-Multi-Arch: foreign
-Depends: ${misc:Depends}, snapd
+Pre-Depends: debconf
+Depends: snapd, ${misc:Depends}
 Conflicts: fwupd
 Replaces: fwupd
 Description: Firmware update daemon (snap version)

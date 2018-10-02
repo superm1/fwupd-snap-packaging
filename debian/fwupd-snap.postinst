@@ -1,17 +1,27 @@
 #!/bin/sh
-
 set -e
 
-case $1 in
+case "$1" in
     configure)
-        if snap list fwupd 1>/dev/null 2>&1; then
-            echo "Skipping fwupd snap installation"
-        else
-            snap ack /usr/lib/fwupd-snap/fwupd.assert
-            snap install /usr/lib/fwupd-snap/fwupd.snap --classic
-        fi
-        ;;
+        . /usr/share/debconf/confmodule
 
+        if snap list fwupd 1>/dev/null 2>&1; then
+            exit 0
+        fi
+
+        # Install the snap
+        echo "==> Installing the fwupd snap"
+        snap install fwupd --classic
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
 esac
 
 #DEBHELPER#

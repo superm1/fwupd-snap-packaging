@@ -1,0 +1,55 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    install|upgrade)
+        . /usr/share/debconf/confmodule
+
+        if snap list fwupd 1>/dev/null 2>&1; then
+            echo "fwupd snap already installed"
+            exit 0
+        fi
+
+        # Check store connectivity
+        echo "==> Checking connectivity with the snap store"
+        COUNT=0
+        while :; do
+        snap info fwupd >/dev/null 2>&1 && break
+
+        db_fset fwupd-snap/snap-no-connectivity seen false
+        if ! db_input critical fwupd-snap/snap-no-connectivity; then
+                if [ "${COUNT}" = "0" ]; then
+                echo "===> Unable to contact the store, trying every minute for the next 30 minutes"
+                elif [ "${COUNT}" = "10" ]; then
+                echo "===> Still unable to contact the store, trying for another 20 minutes"
+                elif [ "${COUNT}" = "20" ]; then
+                echo "===> Still unable to contact the store, trying for another 10 minutes"
+                elif [ "${COUNT}" = "30" ]; then
+                echo "===> Still unable to contact the store, aborting"
+                exit 1
+                fi
+
+                sleep 1m
+        else
+                if [ "${COUNT}" = "0" ]; then
+                echo "===> Unable to contact the store"
+                fi
+        fi
+
+        db_go
+        COUNT=$((COUNT+1))
+        done
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

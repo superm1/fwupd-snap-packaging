@@ -1,0 +1,8 @@
+Template: fwupd-snap/snap-no-connectivity
+Type: note
+_Description: Unable to reach the snap store
+ Your system is unable to reach the snap store, please make sure you're
+ connected to the Internet and update any firewall or proxy settings as
+ needed so that you can reach the snap store.
+ .
+ You can manually check for connectivity by running "snap info fwupd"

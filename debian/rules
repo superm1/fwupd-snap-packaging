@@ -4,9 +4,3 @@ include /usr/share/dpkg/default.mk
 
 %:
 	dh $@
-
-destdir := debian/fwupd-snap
-
-override_dh_auto_install:
-	dh_auto_install --destdir=$(destdir)
-
